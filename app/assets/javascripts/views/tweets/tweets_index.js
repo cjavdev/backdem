@@ -6,9 +6,16 @@ BackboneDemo.Views.TweetsIndex = Backbone.View.extend({
   },
 
   events: {
-    'click button': 'doThing'
+    'click .btn-compose': 'openTweetForm'
   },
 
+  openTweetForm: function () {
+    var modal = new BackboneDemo.Views.TweetForm({
+      model: new BackboneDemo.Models.Tweet(),
+      collection: this.collection
+    });
+    $('body').prepend(modal.render().$el);
+  },
 
   doThing: function () {
     console.log('doing the damn thing');
@@ -29,7 +36,7 @@ BackboneDemo.Views.TweetsIndex = Backbone.View.extend({
       var view = new BackboneDemo.Views.TweetsIndexItem({
         model: tweet
       });
-      this.$('ul').append(view.render().$el);
+      this.$('ul').prepend(view.render().$el);
     }, this);
 
     return this;

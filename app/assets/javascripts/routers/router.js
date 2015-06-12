@@ -1,6 +1,7 @@
 BackboneDemo.Routers.Router = Backbone.Router.extend({
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
+    this.tweets = options.tweets;
   },
 
   routes: {
@@ -12,10 +13,9 @@ BackboneDemo.Routers.Router = Backbone.Router.extend({
     // get either a model or collection
     // initialize a view with that model or collection
     // render the view
-    var tweets = new BackboneDemo.Collections.Tweets();
-    tweets.fetch();
+    this.tweets.fetch();
     var view = new BackboneDemo.Views.TweetsIndex({
-      collection: tweets
+      collection: this.tweets
     });
     this.$rootEl.html(view.render().$el);
   },
